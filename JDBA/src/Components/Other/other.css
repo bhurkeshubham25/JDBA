@@ -1,0 +1,57 @@
+.badminton-associations {
+  padding: 40px 0;
+  font-family: sans-serif;
+  letter-spacing: 1px;
+}
+
+.badminton-associations h1 {
+  font-size: 24px;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.associations-list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.association-card {
+  background: #fff;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.association-logo {
+  margin-bottom: 15px;
+}
+
+.logo-image {
+  max-height: 60px; /* Adjust based on your logo sizes */
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.association-card h2 {
+  font-size: 20px;
+  margin: 10px 0;
+  color: #333;
+}
+
+.association-card p {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.read-more {
+  color: #0066cc;
+  text-decoration: none;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.read-more:hover {
+  text-decoration: underline;
+}

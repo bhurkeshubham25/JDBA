@@ -1,0 +1,56 @@
+.header {
+  background-color: #ffffff;
+  padding: 10px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.logo {
+  width: 71px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: bold;
+  color: orange;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav a {
+  text-decoration: none;
+  color: black;
+  font-size: 20px;
+  transition: color 0.2s ease-in-out;
+}
+
+.nav a:hover {
+  color: orange;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.user-icon{
+  font-size: 38px;
+  color: #0099e5;
+}

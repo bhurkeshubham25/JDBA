@@ -1,0 +1,80 @@
+.tournaments-container {
+  max-width: 1400px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+.Tournament-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 4px;
+}
+
+.Tournament-title::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-56%);
+  height: 4px;
+  width: 195px;
+  background-color: orange;
+  border-radius: 2px;
+}
+
+.tournament-boxes {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.box {
+  flex: 1;
+  min-width: 300px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  margin-top: 25px;
+}
+
+.box-header {
+  background-color: orange;
+  color: white;
+  font-weight: 700;
+  text-align: center;
+  padding: 16px 0;
+  font-size: 26px;
+  margin-bottom: 15px;
+}
+
+.box-list {
+  list-style: none;
+  padding: 20px 24px;
+  margin: 0;
+}
+
+.box-list li {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.box-list li p {
+  margin: 0;
+  font-size: 23px;
+}
+
+.icon {
+  color: #2196f3;
+  margin-right: 12px;
+  margin-top: 3px;
+  flex-shrink: 0;
+  font-size: 23px;
+}

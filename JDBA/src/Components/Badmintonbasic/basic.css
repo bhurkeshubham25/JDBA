@@ -1,0 +1,36 @@
+
+
+.badminton-section {
+  padding: 60px 0;
+}
+
+.section-title-basic {
+  font-size: 32px;
+  font-weight: 700;
+  position: relative;
+  padding: 0;
+  display: inline-block;
+}
+.section-title-basic::after {
+  content: "";
+  position: absolute;
+  width: 205px;
+  height: 4px;
+  background-color: orange;
+  left: 50%;
+  transform: translateX(-58%);
+  bottom: -5px;
+}
+.basic-image{
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+}
+.badminton-design img{
+  max-width: 1600px;
+  position: absolute;
+  transform: translateX(-56%);
+  top: 10px;
+}

@@ -1,0 +1,46 @@
+.vision-section {
+  padding: 130px 0;
+  margin-top: 10px;
+  position: relative;
+}
+
+
+
+.vision-content {
+  margin: 0 auto;
+  position: relative;
+  z-index: 1; 
+  bottom: 56px;
+}
+
+.vision-title {
+  font-size: 30px;
+  color: #FFFFFF;
+  margin-bottom: 20px;
+  font-weight: 200;
+}
+
+.vision-text {
+  font-size: 23px;
+  line-height: 1.6;
+  color: #FFFFFF;
+  margin-bottom: 25px;
+  font-weight: 500;
+}
+
+.vision-button {
+  background-color: orange;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  font-size: 18px;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  
+}
+
+.vision-button:hover {
+  background-color: #e69500;
+  transform: translatey(-2px);
+}
