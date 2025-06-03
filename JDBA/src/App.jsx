@@ -4,7 +4,7 @@ import Header from './Components/Header';
 import Vision from './Components/Vision';
 import Tournaments from './Components/Tournaments';
 import BadmintonBasics from './Components/Badmintonbasic';
-import BadmintonAssociations from './Components/Other';
+import Sponsors from './Components/Sponsors';
 
 function App() {
   
@@ -16,9 +16,9 @@ function App() {
       <About></About>
       <Tournaments></Tournaments>
       <BadmintonBasics></BadmintonBasics>
-      <BadmintonAssociations></BadmintonAssociations>
+      <Sponsors></Sponsors>
     </>
   )
 }
 
-export default App
+export default App;

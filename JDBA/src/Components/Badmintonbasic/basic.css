@@ -30,7 +30,7 @@
 }
 .badminton-design img{
   max-width: 1600px;
-  position: absolute;
-  transform: translateX(-56%);
+  position: static;
+  transform: translateX(-68px);
   top: 10px;
 }
