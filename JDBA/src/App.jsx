@@ -5,6 +5,7 @@ import Vision from './Components/Vision';
 import Tournaments from './Components/Tournaments';
 import BadmintonBasics from './Components/Badmintonbasic';
 import Sponsors from './Components/Sponsors';
+import SignIn from './Components/Signin';
 
 function App() {
   
@@ -17,6 +18,7 @@ function App() {
       <Tournaments></Tournaments>
       <BadmintonBasics></BadmintonBasics>
       <Sponsors></Sponsors>
+      <SignIn></SignIn>
     </>
   )
 }
