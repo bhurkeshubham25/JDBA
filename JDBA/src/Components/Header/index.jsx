@@ -29,7 +29,7 @@ const location = useLocation();
               About us
             </Link>
             <Link 
-              to="/contact" 
+              to="/fqa" 
               className={`nav-link ${location.pathname === "/fqa" ? "active" : ""}`} 
               onClick={() => window.scrollTo(0, 0)}
             >

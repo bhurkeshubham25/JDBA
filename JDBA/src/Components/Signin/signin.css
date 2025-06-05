@@ -43,7 +43,7 @@
 }
 @keyframes typing {
   from {
-    width: 0ch;
+    width: 0.5ch;
   }
 }
 .signin-subtitle {
