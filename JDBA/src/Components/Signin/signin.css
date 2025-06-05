@@ -8,24 +8,23 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 40px;
   flex-wrap: wrap;
 }
 
 /* Left Content */
 .signin-left {
-  flex: 1;
-  min-width: 320px;
+  min-width: 500px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 25px;
 }
 
 /* Logo + Title Row (optional if you want logo on top left) */
 .signin-header {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 8px;
   justify-content: center;
   margin-bottom: 20px;
 }
@@ -35,21 +34,31 @@
   font-size: 40px;
   font-weight: 600;
   text-align: center;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
+  margin-top: 22px;
+  width: 20ch;
+  text-wrap: nowrap;
+  overflow: hidden;
+  animation: typing 2s steps(20) infinite;
 }
-
+@keyframes typing {
+  from {
+    width: 0ch;
+  }
+}
 .signin-subtitle {
   font-size: 22px;
   font-weight: 500;
-  margin-bottom: 20px;
+  margin-bottom: 35px;
   text-align: center;
+  margin-top: 2px;
 }
 
 /* Form Styling */
 .signin-form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 8px;
   max-width: 350px;
   width: 100%;
 }
@@ -57,7 +66,9 @@
 /* Label + Input Box */
 label {
   font-weight: 500;
-  margin-bottom: 5px;
+  margin-bottom: 0px;
+  margin-top: 17px;
+  font-size: 20px;
 }
 
 .input-box {
@@ -85,9 +96,11 @@ label {
 
 /* Sign-up Prompt */
 .signup-text {
-  font-size: 16px;
-  text-align: center;
-  font-weight: 400;
+    font-size: 20px;
+    text-align: center;
+    font-weight: 400;
+    margin-top: 22px;
+    margin-bottom: 10px;
 }
 
 .highlight {
@@ -119,19 +132,28 @@ label {
 
 /* Right Side Image */
 .signin-right {
-  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 40px 0;
-  min-height: 490px;
+  min-height: 640px;
+  min-width: 520px;
+  padding-right: 25px;
 }
 
 .signin-right img {
-  max-width: 100%;
-  max-height: 490px;
+  width: 500px;
+  height: 630px;
   object-fit: cover;
   border-radius: 20px;
+}
+.signin-org-name{
+  font-size: 30px;
+  font-weight: 700;
+  color: #FE9701;
+}
+.signin-logo{
+  width: 71px;
+  height: auto;
 }
 
 /* Tablet Screens */

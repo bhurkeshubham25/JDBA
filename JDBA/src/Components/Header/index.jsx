@@ -1,7 +1,10 @@
 import "./header.css";
 import logo from "../../assets/logo.png";
+import { Link, useLocation } from "react-router-dom";
 
 const Header = () => {
+const location = useLocation();
+
   return (
     <header className="header">
       <div className="container">
@@ -11,9 +14,27 @@ const Header = () => {
             <h1 className="title">Jalgaon District Badminton Association</h1>
           </div>
           <nav className="nav">
-            <a href="#home">Home</a>
-            <a href="#about">About us</a>
-            <a href="#faq">FQA</a>
+            <Link 
+              to="/" 
+              className={`nav-link ${location.pathname === "/" ? "active" : ""}`} 
+              onClick={() => window.scrollTo(0, 0)}
+            >
+              Home
+            </Link>
+            <Link 
+              to="/about" 
+              className={`nav-link ${location.pathname === "/about" ? "active" : ""}`} 
+              onClick={() => window.scrollTo(0, 0)}
+            >
+              About us
+            </Link>
+            <Link 
+              to="/contact" 
+              className={`nav-link ${location.pathname === "/fqa" ? "active" : ""}`} 
+              onClick={() => window.scrollTo(0, 0)}
+            >
+              FQA
+            </Link>
             <button className="button">
               Sign In
               <svg className="button-icon" viewBox="0 0 24 24" fill="currentColor">

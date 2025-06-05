@@ -34,14 +34,15 @@
   gap: 25px;
 }
 
-.nav a {
+.nav-link {
   text-decoration: none;
   color: black;
   font-size: 20px;
   transition: color 0.2s ease-in-out;
 }
 
-.nav a:hover {
+.nav-link:hover, 
+.nav-link.active {
   color: orange;
 }
 
