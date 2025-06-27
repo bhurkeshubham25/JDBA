@@ -1,6 +1,6 @@
 /* Base Section Styling */
 .signin-section {
-  padding: 40px 15px;
+  padding: 0px 15px 44px 15px;
 }
 
 /* Container Setup */
@@ -13,25 +13,19 @@
 
 /* Left Content */
 .signin-left {
-  min-width: 500px;
+  min-width: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 25px;
+  justify-content: center;
+  padding-top: 80px;
+  padding-left: 30px;
 }
 
-/* Logo + Title Row (optional if you want logo on top left) */
-.signin-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  justify-content: center;
-  margin-bottom: 20px;
-}
 
 .signin-title {
   color: #0077cc;
-  font-size: 40px;
+  font-size: 50px;
   font-weight: 600;
   text-align: center;
   margin-bottom: 4px;
@@ -47,7 +41,7 @@
   }
 }
 .signin-subtitle {
-  font-size: 22px;
+  font-size: 27px;
   font-weight: 500;
   margin-bottom: 35px;
   text-align: center;
@@ -68,7 +62,7 @@ label {
   font-weight: 500;
   margin-bottom: 0px;
   margin-top: 17px;
-  font-size: 20px;
+  font-size: 25px;
 }
 
 .input-box {
@@ -78,7 +72,7 @@ label {
 .input-box input {
   width: 100%;
   padding: 10px 38px 10px 12px;
-  font-size: 15px;
+  font-size: 17px;
   background: #e0e0e0;
   border: none;
   border-radius: 6px;
@@ -90,13 +84,13 @@ label {
   right: -50px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 18px;
+  font-size: 23px;
   color: gray;
 }
 
 /* Sign-up Prompt */
 .signup-text {
-    font-size: 20px;
+    font-size: 23px;
     text-align: center;
     font-weight: 400;
     margin-top: 22px;
@@ -136,13 +130,13 @@ label {
   justify-content: center;
   align-items: center;
   min-height: 640px;
-  min-width: 520px;
-  padding-right: 25px;
+  min-width: 550px;
+  padding-right: 55px;
 }
 
 .signin-right img {
   width: 500px;
-  height: 630px;
+  height: 560px;
   object-fit: cover;
   border-radius: 20px;
 }

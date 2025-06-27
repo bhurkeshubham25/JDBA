@@ -3,6 +3,7 @@ import "./tournament.css";
 
 const Tournaments = () => {
   return (
+    <section className="tourni-section">
    <div className="container tournaments-container">
       <h2 className="Tournament-title">
   Tournaments Info
@@ -42,6 +43,7 @@ const Tournaments = () => {
         </div>
       </div>
     </div>
+    </section>
   );
 };
 

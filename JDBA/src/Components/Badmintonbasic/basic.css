@@ -1,7 +1,7 @@
 
 
 .badminton-section {
-  padding: 60px 0;
+  padding: 25px 0 5px 0;
 }
 
 .section-title-basic {
@@ -33,4 +33,62 @@
   position: static;
   transform: translateX(-68px);
   top: 10px;
+}
+/* --------- Media Queries for Badminton Basics --------- */
+
+/* Laptops (≤ 1024px) */
+@media screen and (max-width: 1024px) {
+  .section-title-basic {
+    font-size: 28px;
+  }
+
+  .section-title-basic::after {
+    width: 180px;
+  }
+
+  .badminton-design img {
+    transform: translateX(-40px);
+    max-width: 100%;
+  }
+}
+
+/* Tablets (≤ 768px) */
+@media screen and (max-width: 768px) {
+  .section-title-basic {
+    font-size: 26px;
+    padding-left: 10px;
+  }
+
+  .section-title-basic::after {
+    width: 150px;
+  }
+
+  .badminton-design img {
+    transform: translateX(0);  /* Center it on tablets */
+    max-width: 100%;
+  }
+}
+
+/* Mobile Phones (≤ 480px) */
+@media screen and (max-width: 480px) {
+  .section-title-basic {
+    font-size: 26px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .section-title-basic::after {
+    width: 130px;
+    transform: translateX(-50%);
+  }
+
+  .badminton-design img {
+    transform: translateX(0); /* Reset any offset */
+    max-width: 100%;
+    height: auto;
+  }
+
+  .basic-image {
+    padding: 0 10px;
+  }
 }

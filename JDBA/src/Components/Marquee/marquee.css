@@ -1,0 +1,60 @@
+.marquee-container {
+  width: 100%;
+  overflow: hidden;
+  background-color: orange;
+  color: #004a7c;
+  font-weight: 450;
+  padding: 4px 0;
+  position: relative;
+}
+
+.marquee {
+  display: flex;
+  width: max-content;
+  animation: scroll-left 17s linear infinite;
+}
+
+.marquee-track {
+  display: flex;
+}
+
+.marquee span {
+  padding-right: 50px;
+  font-size: 21px;
+  display: inline-flex;
+  align-items: center;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+.marquee-icon {
+  padding-bottom: 4px;
+  padding-right: 2px;
+  font-size: 19px; 
+}
+@media (max-width: 1024px) {
+  .marquee span {
+    font-size: 18px;
+    padding-right: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .marquee span {
+    font-size: 16px;
+    padding-right: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .marquee span {
+    font-size: 14px;
+    padding-right: 20px;
+  }
+}

@@ -1,6 +1,11 @@
+.tourni-section{
+background-color: #edefef;
+padding: 8px 0 45px 0px ;
+}
+
 .tournaments-container {
   max-width: 1350px;
-  margin: 60px auto;
+  margin: 23px auto;
   padding: 0px;
 }
 
@@ -11,6 +16,7 @@
   position: relative;
   display: inline-block;
   padding-bottom: 4px;
+  margin-top: 8px;
 }
 
 .Tournament-title::after {
@@ -39,7 +45,7 @@
   border: 1px solid #ddd;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   margin-top: 25px;
 }
 
@@ -77,4 +83,93 @@
   margin-top: 3px;
   flex-shrink: 0;
   font-size: 23px;
+}
+
+/* ---------- Responsive Media Queries ---------- */
+
+/* Mobile Phones (≤ 480px) */
+@media (max-width: 480px) {
+  .Tournament-title {
+    font-size: 20px;
+    text-align: center;
+    width: 100%;
+  }
+
+  .Tournament-title::after {
+    width: 120px;
+  }
+
+  .tournament-boxes {
+    flex-direction: column;
+  }
+
+  .box {
+    border-radius: 12px;
+  }
+
+  .box-header {
+    font-size: 20px;
+    padding: 12px 0;
+  }
+
+  .box-list {
+    padding: 16px;
+  }
+
+  .icon {
+    font-size: 18px;
+    margin-top: 2px;
+  }
+}
+
+/* Tablets (≤ 768px) */
+@media (max-width: 768px) {
+  .Tournament-title {
+    font-size: 26px;
+    text-align: center;
+    padding-left: 10px;
+  }
+
+  .Tournament-title::after {
+    width: 150px;
+  }
+
+  .tournament-boxes {
+    flex-direction: column;
+    gap: 21px;
+  }
+
+  .box {
+    min-width: 350px;
+    margin: 0px 8px;
+  }
+
+  .box-header {
+    font-size: 22px;
+  }
+
+  .box-list li p,
+  .box-list li strong {
+    font-size: 15px;
+  }
+
+  .icon {
+    font-size: 20px;
+  }
+}
+
+/* Normal Laptops (≤ 1024px) */
+@media (max-width: 1024px) {
+  .Tournament-title {
+    font-size: 26px;
+    padding-left: 10px;
+  }
+
+  .Tournament-title::after {
+    width: 180px;
+  }
+
+  .icon {
+    font-size: 22px;
+  }
 }

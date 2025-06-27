@@ -9,10 +9,7 @@ const SignIn = () => {
     <section className="signin-section">
       <div className="container signin-container">
         <div className="signin-left">
-          <div className="signin-header">
-            <img src={logo} alt="JDBA Logo" className="signin-logo" />
-            <h2 className="signin-org-name">Jalgaon District Badminton Association</h2>
-          </div>
+          
 
           <h1 className="signin-title">Welcome Back..!</h1>
           <p className="signin-subtitle">Sign-In To Your Account</p>

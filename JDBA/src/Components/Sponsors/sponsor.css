@@ -1,7 +1,8 @@
 /* Sponsor Section */
 .sponsor-container {
   width: 100%;
-  padding: 10px 0;
+  padding: 10px 0px 75px 0px;
+  background-color: #edefef;
 }
 
 .sponsors-section {
@@ -44,7 +45,7 @@
   border-radius: 8px;
   padding: 15px 10px;
   background: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -80,18 +81,76 @@
 }
 
 /* Responsive adjustments */
+
+
+
+/* -------- Media Query for Normal Size Laptops (≤ 1440px) -------- */
+@media screen and (max-width: 1440px) {
+  .sponsors-title {
+    font-size: 30px;
+    padding-left: 10px;
+  }
+
+  .sponsor-grid {
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 20px;
+  }
+
+  .sponsor-card {
+    max-width: 400px;
+    padding: 20px 12px;
+    min-height: 150px;
+  }
+
+  .logo-container {
+    height: 130px;
+  }
+
+  .sponsor-label {
+    font-size: 18px;
+  }
+}
 @media (max-width: 768px) {
   .sponsor-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
   }
+  .sponsor-card {
+    max-width: 300px;
+  }
+  .sponsors-title {
+    font-size: 26px;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 30px;
+    position: relative;
+    padding-left: 10px;
 }
-
+}
 @media (max-width: 480px) {
   .sponsor-grid {
     grid-template-columns: 1fr;
+    gap: 10px;
   }
   
   .sponsor-card {
-    max-width: 100%;
+    max-width: 270px;
   }
+  .sponsors-title {
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+    width: 100%;
+}
+.sponsors-title::after{
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 160px;
+  width: 100px;
+  height: 4px;
+  background-color: orange;
+}
 }

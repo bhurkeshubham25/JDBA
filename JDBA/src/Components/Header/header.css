@@ -1,13 +1,14 @@
+/* Header Styling */
 .header {
   background-color: #ffffff;
-  padding: 10px 0;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px 0 0 0;
 }
 
 .header-inner {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 10px;
 }
 
 .header-left {
@@ -27,7 +28,7 @@
   color: orange;
 }
 
-/* Navigation */
+/* Navigation Links */
 .nav {
   display: flex;
   align-items: center;
@@ -41,13 +42,14 @@
   transition: color 0.2s ease-in-out;
 }
 
-.nav-link:hover, 
+.nav-link:hover,
 .nav-link.active {
   color: orange;
 }
 
-/* Apply Now Button */
-.button {
+/* Sign In Button Styles (for both <button> and <Link>) */
+.button,
+a.button {
   position: relative;
   transition: all 0.3s ease-in-out;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
@@ -55,7 +57,7 @@
   padding-inline: 1.5rem;
   background-color: rgb(0, 107, 179);
   border-radius: 9999px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   color: #ffffff;
@@ -66,6 +68,12 @@
   font-size: 16px;
   cursor: pointer;
   overflow: hidden;
+  text-decoration: none !important;
+  letter-spacing: normal;
+}
+
+a.button:hover {
+  text-decoration: none;
 }
 
 .button-icon {
@@ -107,7 +115,88 @@
   0% {
     left: -100px;
   }
-  60%, 100% {
+  60%,
+  100% {
     left: 100%;
+  }
+}
+/* Responsive Header Styles */
+
+/* Tablets (768px and below) */
+@media (max-width: 768px) {
+  .header-inner {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .title {
+    font-size: 22px;
+    text-align: center;
+    margin-top: 5px;
+  }
+
+  .nav {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 16px;
+    padding-bottom: 10px;
+  }
+
+  .nav-link {
+    font-size: 18px;
+  }
+
+  .button {
+    font-size: 14px;
+    padding: 0.4rem 1.2rem;
+    margin-top: 5px;
+  }
+}
+
+/* Mobile phones (480px and below) */
+@media (max-width: 480px) {
+  .header-left {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .logo {
+    width: 60px;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .nav {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .nav-link {
+    font-size: 16px;
+  }
+
+  .button {
+    font-size: 13px;
+    padding: 0.3rem 1rem;
+  }
+}
+
+/* Laptops or large tablets (1024px and below) */
+@media (max-width: 1024px) {
+  .title {
+    font-size: 26px;
+  }
+
+  .nav-link {
+    font-size: 18px;
+  }
+
+  .button {
+    font-size: 15px;
+    padding: 0.4rem 1.3rem;
   }
 }

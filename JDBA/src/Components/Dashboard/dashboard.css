@@ -1,0 +1,142 @@
+.dashboard-wrapper {
+  display: flex;
+  gap: 20px;
+  padding: 30px 0;
+  box-sizing: border-box;
+}
+
+.profile-section {
+  flex: 1;
+  max-width: 440px;
+  padding-right: 20px;
+}
+
+h2 {
+  font-weight: 500;
+}
+
+.profile-info {
+  font-weight: 550;
+}
+
+.photo-box {
+  width: 164px;
+  height: 178px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+.plus-icon {
+  font-size: 32px;
+  color: black;
+}
+
+.arrow-icon {
+  padding-top: 5px;
+  margin-right: 10px;
+}
+
+.profile-detail {
+  margin-top: 18px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.profile-detail p {
+  margin: 0;
+  margin-left: 4px;
+}
+
+.profile-btn {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-btn,
+.changepassword-btn {
+  background-color: orange;
+  color: white;
+  padding: 10px 20px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: max-content;
+}
+
+.tournament-section {
+  flex: 2;
+  
+  border-radius: 12px;
+  padding: 19px;
+  box-sizing: border-box;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.tournament-title {
+  color: orange;
+  margin-bottom: 10px;
+}
+
+.filter-types {
+  margin-bottom: 15px;
+  display: flex;
+  gap: 20px;
+  font-size: 14px;
+}
+.filter-types input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: white;
+  margin: 0;
+  font: inherit;
+  color: currentColor;
+  width: 15px;
+  height: 14px;
+  border: 2px solid orange;
+  border-radius: 50%;
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.filter-types input[type="radio"]::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  background-color: orange;
+}
+
+.filter-types input[type="radio"]:checked::before {
+  transform: scale(1);
+}
+
+.filter-types label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.tournament-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tournament-table th,
+.tournament-table td {
+  padding: 13px 8px;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+}
