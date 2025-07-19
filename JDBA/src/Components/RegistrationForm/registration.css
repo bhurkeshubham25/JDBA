@@ -58,7 +58,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   color: orange;
   font-size: 24px;
   margin-bottom: 5px;
-  margin-top: 16px;
+  margin-top: 9px;
 }
 
 .register-right p {
@@ -79,6 +79,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   display: block;
   font-weight: 600;
   margin-bottom: 8.4px;
+  font-size: 21px;
 }
 .input-wrapper input,
 .input-wrapper select {

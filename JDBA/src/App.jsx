@@ -1,49 +1,70 @@
 import './App.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from './Context/AuthContext';
 
-import Header from './Components/Header';
-import About from './Components/About';
+// Pages
+import Signinpage from './Pages/Signinpage';
+import Aboutpage from './Pages/Aboutpage';
+import Registration from './Components/RegistrationForm/registration';
+import Dashboard from './Components/Dashboard';
+import MyEntries from './Components/Myentry';
+import TournamentEntry from './Components/Tournamententry';
+
+// Public Layout Sections
 import Vision from './Components/Vision';
+import About from './Components/About';
+import Carousel from './Components/carousel';
 import Tournaments from './Components/Tournaments';
 import BadmintonBasics from './Components/Badmintonbasic';
 import Sponsors from './Components/Sponsors';
-import SignIn from './Components/Signin';
-import Carousel from './Components/carousel';
-import Footer1 from './Components/footer1';
-import Registration from './Components/RegistrationForm/registration';
-import Dashhead from './Components/Dashheader';
-import Dashboard from './Components/Dashboard';
-import Dashfooter from './Components/Dashfooter';
-import TournamentEntry from './Components/Tournamententry';
-import MyEntries from './Components/Myentry';
-import BadmintonAssociations from './Components/Other';
-import Signinpage from './Pages/Signinpage';
-import Aboutpage from './Pages/Aboutpage';
+
+// Layouts
+import PublicLayout from './layouts/PublicLayout';
+import DashboardLayout from './layouts/DashboardLayout';
+import PrivateRoute from './routes/PrivateRoute';
 
 function App() {
   return (
     <BrowserRouter>
-      <Header />
       <Routes>
-        <Route 
-          path="/" 
-          element={
-            <>
-              <Vision />
-              <About />
-              <Carousel></Carousel>
-              <Tournaments />
-              <BadmintonBasics />
-              <Sponsors />
-              
-            </>
-          } 
-        />
-        <Route path="/about" element={<Aboutpage />} />
-        <Route path="/fqa" element={<div style={{ padding: '2rem' }}><h2>FQA Page Placeholder</h2></div>} />
-        <Route path="/signin" element={<Signinpage />} />
+
+        <Route path="/" element={
+          <PublicLayout>
+            <Vision />
+            <About />
+            <Carousel />
+            <Tournaments />
+            <BadmintonBasics />
+            <Sponsors />
+          </PublicLayout>
+        } />
+        <Route path="/about" element={<PublicLayout><Aboutpage /></PublicLayout>} />
+        <Route path="/fqa" element={<PublicLayout><div style={{ padding: '2rem' }}><h2>FQA Page Placeholder</h2></div></PublicLayout>} />
+        <Route path="/signin" element={<PublicLayout><Signinpage /></PublicLayout>} />
+        <Route path="/register" element={<PublicLayout><Registration /></PublicLayout>} />
+
+        <Route path="/dashboard" element={
+          <PrivateRoute>
+            <DashboardLayout><Dashboard /></DashboardLayout>
+          </PrivateRoute>
+        } />
+
+        <Route path="/my-entries" element={
+          <PrivateRoute>
+            <DashboardLayout><MyEntries /></DashboardLayout>
+          </PrivateRoute>
+        } />
+
+        <Route path="/tournament-entry" element={
+          <PrivateRoute>
+            <DashboardLayout><TournamentEntry /></DashboardLayout>
+          </PrivateRoute>
+        } />
+
+        {/* You can add TournamentWithdrawal and others similarly */}
+
       </Routes>
-      <Footer1></Footer1>
     </BrowserRouter>
   );
 }

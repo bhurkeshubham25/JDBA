@@ -13,7 +13,7 @@
 
 /* Left Content */
 .signin-left {
-  min-width: 600px;
+  min-width: 550px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -97,11 +97,16 @@ label {
     margin-bottom: 10px;
 }
 
-.highlight {
+.signup-text a,
+.signup-text a:visited,
+.signup-text a:hover,
+.signup-text a:active {
   color: orange;
   font-weight: bold;
-  cursor: pointer;
+  text-decoration: none;
 }
+
+
 
 /* Button Container */
 .btn-div {
@@ -131,11 +136,11 @@ label {
   align-items: center;
   min-height: 640px;
   min-width: 550px;
-  padding-right: 55px;
+  padding-right: 30px;
 }
 
 .signin-right img {
-  width: 500px;
+  width: 550px;
   height: 560px;
   object-fit: cover;
   border-radius: 20px;
@@ -150,64 +155,4 @@ label {
   height: auto;
 }
 
-/* Tablet Screens */
-@media screen and (max-width: 1024px) {
-  .signin-container {
-    flex-direction: column-reverse;
-    align-items: center;
-    text-align: center;
-  }
 
-  .signin-left,
-  .signin-right {
-    width: 100%;
-  }
-
-  .signin-form {
-    align-items: center;
-  }
-
-  .signin-form input {
-    text-align: center;
-  }
-
-  .signin-btn {
-    align-self: center;
-  }
-
-  .signin-right img {
-    max-width: 80%;
-    max-height: 400px;
-    margin-top: -20px;
-    margin-bottom: -20px;
-  }
-}
-
-/* Mobile Screens */
-@media screen and (max-width: 768px) {
-  .signin-title {
-    font-size: 26px;
-  }
-
-  .signin-subtitle {
-    font-size: 16px;
-  }
-
-  .input-box input {
-    font-size: 14px;
-    padding: 10px 36px 10px 10px;
-  }
-
-  .signin-btn {
-    font-size: 15px;
-    padding: 10px 25px;
-  }
-
-  .signup-text {
-    font-size: 13px;
-  }
-
-  .signin-right img {
-    max-height: 300px;
-  }
-}
