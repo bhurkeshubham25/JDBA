@@ -15,29 +15,29 @@ const Dashhead = () => {
           </div>
           <nav className="dashnav">
             <Link 
-              to="/" 
+              to="/dashboard" 
               className={`dashnav-link ${location.pathname === "/" ? "active" : ""}`} 
               onClick={() => window.scrollTo(0, 0)}
             >
               Dashboard
             </Link>
             <Link 
-              to="/about" 
-              className={`dashnav-link ${location.pathname === "/about" ? "active" : ""}`} 
+              to="/tournament-entry" 
+              className={`dashnav-link ${location.pathname === "/tournament-entry" ? "active" : ""}`} 
               onClick={() => window.scrollTo(0, 0)}
             >
               Tournament Entry
             </Link>
             <Link 
               to="/fqa" 
-              className={`dashnav-link ${location.pathname === "/fqa" ? "active" : ""}`} 
+              className={`dashnav-link ${location.pathname === "/tournament-withdrawal" ? "active" : ""}`} 
               onClick={() => window.scrollTo(0, 0)}
             >
               Tournament Withdrawal
             </Link>
              <Link 
-              to="/fqa" 
-              className={`dashnav-link ${location.pathname === "/fqa" ? "active" : ""}`} 
+              to="/my-entries" 
+              className={`dashnav-link ${location.pathname === "/my-entries" ? "active" : ""}`} 
               onClick={() => window.scrollTo(0, 0)}
             >
               My Entries
