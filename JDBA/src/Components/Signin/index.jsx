@@ -3,10 +3,10 @@ import { MdEmail } from "react-icons/md";
 import { IoEyeSharp } from "react-icons/io5";
 import logo from "../../assets/logo.png";
 import signinimg from '../../assets/signinimg.jpg';
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 
+import { useState, useContext } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { AuthContext } from "../../Context/AuthContext";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -14,12 +14,14 @@ const SignIn = () => {
   const [errorMsg, setErrorMsg] = useState("");
   const navigate = useNavigate();
 
+  const { login } = useContext(AuthContext);
+
   const handleLogin = async (e) => {
     e.preventDefault();
     setErrorMsg("");
 
     try {
-      const res = await fetch("http://localhost:5000/login", {
+      const res = await fetch("http://localhost:5000/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -32,8 +34,7 @@ const SignIn = () => {
         return;
       }
 
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("playerId", data.playerId);
+      login(data.token, data.playerId); // Save in context and localStorage
       navigate("/dashboard");
     } catch (err) {
       setErrorMsg("Server error. Try again.");
@@ -72,15 +73,18 @@ const SignIn = () => {
               <span className="icon"><IoEyeSharp /></span>
             </div>
 
-            {errorMsg && <p className="error-msg" style={{ color: "red", fontWeight: "500" }}>{errorMsg}</p>}
+            {errorMsg && (
+              <p className="error-msg" style={{ color: "red", fontWeight: "500" }}>
+                {errorMsg}
+              </p>
+            )}
 
             <p className="signup-text">
-  Do you have account?{" "}
-  <Link to="/register">
-    <span className="highlight">Signup</span>
-  </Link>
-</p>
-
+              Do you have an account?{" "}
+              <Link to="/register">
+                <span className="highlight">Signup</span>
+              </Link>
+            </p>
 
             <div className="btn-div">
               <button type="submit" className="signin-btn">Sign-in</button>

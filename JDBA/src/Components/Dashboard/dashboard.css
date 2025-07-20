@@ -28,12 +28,15 @@ h2 {
   justify-content: center;
   align-items: center;
   margin-bottom: 15px;
-  cursor: pointer;
+  background-color: #f0f0f0;
+  overflow: hidden;
 }
 
-.plus-icon {
-  font-size: 32px;
-  color: black;
+.photo-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px;
 }
 
 .arrow-icon {
@@ -54,26 +57,10 @@ h2 {
   margin-left: 4px;
 }
 
-.profile-btn {
-  display: flex;
-  flex-direction: column;
-}
-
-.edit-btn,
-.changepassword-btn {
-  background-color: orange;
-  color: white;
-  padding: 10px 20px;
-  margin-top: 20px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  width: max-content;
-}
+/* ❌ Removed profile-btn, edit-btn, changepassword-btn styles */
 
 .tournament-section {
   flex: 2;
-  
   border-radius: 12px;
   padding: 19px;
   box-sizing: border-box;
@@ -91,6 +78,7 @@ h2 {
   gap: 20px;
   font-size: 14px;
 }
+
 .filter-types input[type="radio"] {
   appearance: none;
   -webkit-appearance: none;
