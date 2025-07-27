@@ -1,6 +1,4 @@
 
-
-// Base URL of your backend
 const BASE_URL = "http://localhost:5000";
 
 

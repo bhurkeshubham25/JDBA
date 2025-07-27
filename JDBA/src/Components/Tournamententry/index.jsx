@@ -1,192 +1,100 @@
-import { useState } from "react";
-import { FaChevronDown } from "react-icons/fa";
-import "./tournamententry.css";
-import badmintonicon from "../../assets/badmintonicon.jpg";
+import { useEffect, useState } from "react";
+import "./myentries.css";
+import { authenticatedFetch } from "../../utils/api";
 
-const TournamentEntry = () => {
-  const [category, setCategory] = useState("All");
-  const [selectedTournament, setSelectedTournament] = useState("");
-  const [playerEntry, setPlayerEntry] = useState({
-    playerId: "",
-    playerName: "",
-    dob: "",
-    gender: "",
-  });
+const MyEntries = () => {
+  const [entries, setEntries] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [successMsg, setSuccessMsg] = useState("");
 
-  const tournaments = [
-    { id: 1, name: "YONEX India Opens 2025", category: "India" },
-    { id: 2, name: "VICTORY Pune Junior College", category: "District" },
-    { id: 3, name: "Double Bats Bangalore 2025", category: "State" },
-    { id: 4, name: "VICTORY Rajasthan Junior College", category: "State" },
-    { id: 5, name: "Palghar District Tournament", category: "District" },
-  ];
+  const user = JSON.parse(localStorage.getItem("user"));
+  const playerId = user?.player_id;
 
-  const filteredTournaments =
-    category === "All"
-      ? tournaments
-      : tournaments.filter(
-          (t) => t.category.toLowerCase() === category.toLowerCase()
-        );
+  useEffect(() => {
+    const fetchEntries = async () => {
+      try {
+        const res = await authenticatedFetch(`/api/registration/entries/${playerId}`);
+        const fetched = await res.json();
+        setEntries(fetched.entries || []);
+        setLoading(false);
+      } catch (err) {
+        console.error("Error fetching entries:", err);
+        setEntries([]);
+        setLoading(false);
+      }
+    };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setPlayerEntry((prev) => ({ ...prev, [name]: value }));
+    if (playerId) fetchEntries();
+  }, [playerId]);
+
+  const handleRemoveEntry = async (indexToRemove, pid) => {
+    const confirm = window.confirm("Are you sure you want to withdraw this entry?");
+    if (!confirm) return;
+
+    try {
+      await authenticatedFetch("/api/registration/withdraw", {
+        method: "POST",
+        body: JSON.stringify({ player_id: pid }),
+      });
+
+      const updatedEntries = entries.filter((_, idx) => idx !== indexToRemove);
+      setEntries(updatedEntries);
+
+      setSuccessMsg("✅ Entry withdrawn successfully!");
+      setTimeout(() => setSuccessMsg(""), 2000);
+    } catch (error) {
+      alert("❌ Failed to withdraw entry.");
+      console.error(error);
+    }
   };
-
-  const handleSubmit = () => {
-  if (
-    !selectedTournament ||
-    !playerEntry.playerId.trim() ||
-    !playerEntry.playerName.trim() ||
-    !playerEntry.dob.trim() ||
-    !playerEntry.gender.trim()
-  ) {
-    alert("Please fill all the details before submitting.");
-    return;
-  }
-
-  const submittedEntry = {
-    tournament: selectedTournament,
-    ...playerEntry,
-  };
-
-  const existingEntries = JSON.parse(localStorage.getItem("tournamentEntries")) || [];
-  localStorage.setItem("tournamentEntries", JSON.stringify([...existingEntries, submittedEntry]));
-
-  alert("Entry submitted successfully!");
-
-  setPlayerEntry({
-    playerId: "",
-    playerName: "",
-    dob: "",
-    gender: "",
-  });
-};
-
 
   return (
-    <div className="container tournament-entry">
-      <h2 className="heading">Tournament Entry</h2>
+    <div className="container my-entries">
+      <h2 className="entries-heading">My Tournament Entries</h2>
 
-      <div className="filter-section">
-        <label className="filter-label">Select Tournament</label>
-        <div className="radio-group">
-          {["All", "India", "State", "District"].map((cat) => (
-            <label key={cat} className="radio-label">
-              <input
-                type="radio"
-                name="tournament-category"
-                value={cat}
-                checked={category === cat}
-                onChange={() => {
-                  setCategory(cat);
-                  setSelectedTournament("");
-                }}
-              />
-              <span className="custom-radio" />
-              {cat}
-            </label>
-          ))}
-        </div>
-      </div>
+      {successMsg && (
+        <p style={{ color: "green", textAlign: "center", marginBottom: "1rem", fontWeight: "600" }}>
+          {successMsg}
+        </p>
+      )}
 
-      <div className="tournament-box">
-        <h3>Tournament List</h3>
-        <div className="custom-select-wrapper">
-          <select
-            value={selectedTournament}
-            onChange={(e) => setSelectedTournament(e.target.value)}
-          >
-            <option value="">Select Tournament</option>
-            {filteredTournaments.map((tournament) => (
-              <option key={tournament.id} value={tournament.name}>
-                {tournament.name}
-              </option>
+      {loading ? (
+        <p className="no-entries">Loading entries...</p>
+      ) : entries.length === 0 ? (
+        <p className="no-entries">No entries yet for the tournament</p>
+      ) : (
+        <div className="entries-table-wrapper">
+          <div className="entries-table">
+            <div className="entry-row header">
+              <span>Sr No.</span>
+              <span>Tournament Name</span>
+              <span>Player Name</span>
+              <span>DOB</span>
+              <span>Gender</span>
+              <span>Withdraw</span>
+            </div>
+            {entries.map((entry, index) => (
+              <div className="entry-row" key={index}>
+                <span>{index + 1}</span>
+                <span>{entry.tournament_name}</span>
+                <span>{entry.player_name}</span>
+                <span>{entry.dob}</span>
+                <span>{entry.gender}</span>
+                <span>
+                  <button
+                    className="delete-btn"
+                    onClick={() => handleRemoveEntry(index, entry.player_id)}
+                  >
+                    Clear Entry
+                  </button>
+                </span>
+              </div>
             ))}
-          </select>
-          <FaChevronDown className="dropdown-icon" />
-        </div>
-
-        <div className="tournament-details">
-          <h4>Tournaments Details</h4>
-          <p>
-            {selectedTournament
-              ? `Displaying details for "${selectedTournament}"`
-              : "Displaying Selected Tournaments Details"}
-          </p>
-        </div>
-      </div>
-
-      {/* Shuttle Icons */}
-      <div className="shuttles">
-        {[...Array(5)].map((_, i) => (
-          <img
-            key={i}
-            src={badmintonicon}
-            alt="Shuttle"
-            className="shuttle-icon"
-          />
-        ))}
-      </div>
-
-      {/* Player Entry Section */}
-      <div className="player-entry-box">
-        <h3>Add Player Entry</h3>
-        <div className="player-entry-form">
-          <div className="form-group">
-            <label>Player ID:</label>
-            <input
-              type="text"
-              name="playerId"
-              value={playerEntry.playerId}
-              onChange={handleInputChange}
-              disabled={!selectedTournament}
-            />
-          </div>
-          <div className="form-group">
-            <label>Player Name:</label>
-            <input
-              type="text"
-              name="playerName"
-              value={playerEntry.playerName}
-              onChange={handleInputChange}
-              disabled={!selectedTournament}
-            />
-          </div>
-          <div className="form-group">
-            <label>DOB:</label>
-            <input
-              type="date"
-              name="dob"
-              value={playerEntry.dob}
-              onChange={handleInputChange}
-              disabled={!selectedTournament}
-            />
-          </div>
-          <div className="form-group">
-            <label>Gender:</label>
-            <select
-              name="gender"
-              value={playerEntry.gender}
-              onChange={handleInputChange}
-              disabled={!selectedTournament}
-            >
-              <option value="">Select</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-            </select>
-            <FaChevronDown className="dropdown-icon" />
           </div>
         </div>
-
-        <div className="submit-entry">
-          <button onClick={handleSubmit} disabled={!selectedTournament}>
-            Send Entry
-          </button>
-        </div>
-      </div>
+      )}
     </div>
   );
 };
 
-export default TournamentEntry;
+export default MyEntries;
