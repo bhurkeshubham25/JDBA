@@ -1,100 +1,227 @@
-import { useEffect, useState } from "react";
-import "./myentries.css";
+import { useState, useEffect } from "react";
+import { FaChevronDown } from "react-icons/fa";
+import "./tournamententry.css";
+import badmintonicon from "../../assets/badmintonicon.jpg";
 import { authenticatedFetch } from "../../utils/api";
 
-const MyEntries = () => {
-  const [entries, setEntries] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [successMsg, setSuccessMsg] = useState("");
+const TournamentEntry = () => {
+  const [category, setCategory] = useState("All");
+  const [selectedTournament, setSelectedTournament] = useState("");
+  const [playerEntry, setPlayerEntry] = useState({
+    player_id: "",
+    player_name: "",
+    dob: "",
+    gender: "",
+  });
+  const [tournaments, setTournaments] = useState([]);
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
-  const user = JSON.parse(localStorage.getItem("user"));
-  const playerId = user?.player_id;
+  const inferCategoryFromName = (name) => {
+    if (name.toLowerCase().includes("district")) return "District";
+    if (name.toLowerCase().includes("state")) return "State";
+    if (name.toLowerCase().includes("india")) return "India";
+    return "Other";
+  };
 
   useEffect(() => {
-    const fetchEntries = async () => {
+    const fetchTournaments = async () => {
       try {
-        const res = await authenticatedFetch(`/api/registration/entries/${playerId}`);
-        const fetched = await res.json();
-        setEntries(fetched.entries || []);
-        setLoading(false);
+        const data = await authenticatedFetch("/api/tournament/all");
+        const categorized = data.map((t) => ({
+          ...t,
+          category: inferCategoryFromName(t.name),
+        }));
+        setTournaments(categorized);
       } catch (err) {
-        console.error("Error fetching entries:", err);
-        setEntries([]);
-        setLoading(false);
+        console.error("Failed to load tournaments:", err);
       }
     };
 
-    if (playerId) fetchEntries();
-  }, [playerId]);
+    fetchTournaments();
 
-  const handleRemoveEntry = async (indexToRemove, pid) => {
-    const confirm = window.confirm("Are you sure you want to withdraw this entry?");
-    if (!confirm) return;
+    const userData = JSON.parse(localStorage.getItem("user"));
+    if (userData) {
+      setPlayerEntry((prev) => ({
+        ...prev,
+        player_id: userData.player_id || "",
+        player_name: userData.full_name || "",
+        dob: userData.dob || "",
+        gender: userData.gender || "",
+      }));
+    }
+  }, []);
+
+  const filteredTournaments =
+    category === "All"
+      ? tournaments
+      : tournaments.filter((t) => t.category === category);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setPlayerEntry((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async () => {
+    const selected = tournaments.find((t) => t.name === selectedTournament);
+    if (!selected) {
+      alert("Please select a valid tournament.");
+      return;
+    }
+
+    const payload = {
+      tournament_id: selected.id,
+      player_name: playerEntry.player_name,
+      dob: playerEntry.dob,
+      gender: playerEntry.gender,
+    };
 
     try {
-      await authenticatedFetch("/api/registration/withdraw", {
+      await authenticatedFetch("/api/register", {
         method: "POST",
-        body: JSON.stringify({ player_id: pid }),
+        body: JSON.stringify(payload),
       });
 
-      const updatedEntries = entries.filter((_, idx) => idx !== indexToRemove);
-      setEntries(updatedEntries);
-
-      setSuccessMsg("✅ Entry withdrawn successfully!");
-      setTimeout(() => setSuccessMsg(""), 2000);
-    } catch (error) {
-      alert("❌ Failed to withdraw entry.");
-      console.error(error);
+      setShowConfirmation(true);
+      setTimeout(() => setShowConfirmation(false), 3000);
+    } catch (err) {
+      alert("Submission failed: " + err.message);
     }
   };
 
   return (
-    <div className="container my-entries">
-      <h2 className="entries-heading">My Tournament Entries</h2>
+    <div className="container tournament-entry">
+      <h2 className="heading">Tournament Entry</h2>
 
-      {successMsg && (
-        <p style={{ color: "green", textAlign: "center", marginBottom: "1rem", fontWeight: "600" }}>
-          {successMsg}
-        </p>
-      )}
+      <div className="filter-section">
+        <label className="filter-label">Select Tournament</label>
+        <div className="radio-group">
+          {["All", "India", "State", "District"].map((cat) => (
+            <label key={cat} className="radio-label">
+              <input
+                type="radio"
+                name="tournament-category"
+                value={cat}
+                checked={category === cat}
+                onChange={() => {
+                  setCategory(cat);
+                  setSelectedTournament("");
+                }}
+              />
+              <span className="custom-radio" />
+              {cat}
+            </label>
+          ))}
+        </div>
+      </div>
 
-      {loading ? (
-        <p className="no-entries">Loading entries...</p>
-      ) : entries.length === 0 ? (
-        <p className="no-entries">No entries yet for the tournament</p>
-      ) : (
-        <div className="entries-table-wrapper">
-          <div className="entries-table">
-            <div className="entry-row header">
-              <span>Sr No.</span>
-              <span>Tournament Name</span>
-              <span>Player Name</span>
-              <span>DOB</span>
-              <span>Gender</span>
-              <span>Withdraw</span>
-            </div>
-            {entries.map((entry, index) => (
-              <div className="entry-row" key={index}>
-                <span>{index + 1}</span>
-                <span>{entry.tournament_name}</span>
-                <span>{entry.player_name}</span>
-                <span>{entry.dob}</span>
-                <span>{entry.gender}</span>
-                <span>
-                  <button
-                    className="delete-btn"
-                    onClick={() => handleRemoveEntry(index, entry.player_id)}
-                  >
-                    Clear Entry
-                  </button>
-                </span>
-              </div>
+      <div className="tournament-box">
+        <h3>Tournament List</h3>
+        <div className="custom-select-wrapper">
+          <select
+            value={selectedTournament}
+            onChange={(e) => setSelectedTournament(e.target.value)}
+          >
+            <option value="">Select Tournament</option>
+            {filteredTournaments.map((tournament) => (
+              <option key={tournament.id} value={tournament.name}>
+                {tournament.name}
+              </option>
             ))}
+          </select>
+          <FaChevronDown className="dropdown-icon" />
+        </div>
+
+        <div className="tournament-details">
+          <h4>Tournaments Details</h4>
+          <p>
+            {selectedTournament
+              ? `Displaying details for "${selectedTournament}"`
+              : "Displaying Selected Tournaments Details"}
+          </p>
+        </div>
+      </div>
+
+      <div className="shuttles">
+        {[...Array(5)].map((_, i) => (
+          <img
+            key={i}
+            src={badmintonicon}
+            alt="Shuttle"
+            className="shuttle-icon"
+          />
+        ))}
+      </div>
+
+      <div className="player-entry-box">
+        <h3>Add Player Entry</h3>
+        <div className="player-entry-form">
+          <div className="form-group">
+            <label>Player ID:</label>
+            <input
+              type="text"
+              name="player_id"
+              value={playerEntry.player_id}
+              onChange={handleInputChange}
+              disabled
+            />
+          </div>
+          <div className="form-group">
+            <label>Player Name:</label>
+            <input
+              type="text"
+              name="player_name"
+              value={playerEntry.player_name}
+              onChange={handleInputChange}
+              disabled
+            />
+          </div>
+          <div className="form-group">
+            <label>DOB:</label>
+            <input
+              type="date"
+              name="dob"
+              value={playerEntry.dob}
+              onChange={handleInputChange}
+              disabled
+            />
+          </div>
+          <div className="form-group">
+            <label>Gender:</label>
+            <select
+              name="gender"
+              value={playerEntry.gender}
+              onChange={handleInputChange}
+              disabled
+            >
+              <option value="">Select</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+            <FaChevronDown className="dropdown-icon" />
           </div>
         </div>
-      )}
+
+        <div className="submit-entry">
+          <button onClick={handleSubmit} disabled={!selectedTournament}>
+            Send Entry
+          </button>
+        </div>
+
+        {showConfirmation && (
+          <p
+            style={{
+              color: "green",
+              fontWeight: "600",
+              marginTop: "10px",
+              textAlign: "center",
+            }}
+          >
+            ✅ Entry submitted successfully!
+          </p>
+        )}
+      </div>
     </div>
   );
 };
 
-export default MyEntries;
+export default TournamentEntry;
