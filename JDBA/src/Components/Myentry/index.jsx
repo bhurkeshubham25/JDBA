@@ -13,28 +13,30 @@ const MyEntries = () => {
   useEffect(() => {
     const fetchEntries = async () => {
       try {
-        const res = await authenticatedFetch(`/api/registration/entries/${playerId}`);
-        const fetched = await res.json();
-        setEntries(fetched.entries || []);
-        setLoading(false);
+        // ✅ Correct plural route + no res.json() (already parsed)
+        const data = await authenticatedFetch(`/api/registrations/entries/${playerId}`);
+        setEntries(data.entries || []);
       } catch (err) {
         console.error("Error fetching entries:", err);
         setEntries([]);
+      } finally {
         setLoading(false);
       }
     };
 
     if (playerId) fetchEntries();
+    else setLoading(false);
   }, [playerId]);
 
-  const handleRemoveEntry = async (indexToRemove, pid) => {
+  const handleRemoveEntry = async (indexToRemove, pid, tid) => {
     const confirm = window.confirm("Are you sure you want to withdraw this entry?");
     if (!confirm) return;
 
     try {
-      await authenticatedFetch("/api/registration/withdraw", {
+      // ✅ Correct plural route + send BOTH player_id & tournament_id
+      await authenticatedFetch("/api/registrations/withdraw", {
         method: "POST",
-        body: JSON.stringify({ player_id: pid }),
+        body: JSON.stringify({ player_id: pid, tournament_id: tid }),
       });
 
       const updatedEntries = entries.filter((_, idx) => idx !== indexToRemove);
@@ -83,7 +85,9 @@ const MyEntries = () => {
                 <span>
                   <button
                     className="delete-btn"
-                    onClick={() => handleRemoveEntry(index, entry.player_id)}
+                    onClick={() =>
+                      handleRemoveEntry(index, entry.player_id, entry.tournament_id)
+                    }
                   >
                     Clear Entry
                   </button>

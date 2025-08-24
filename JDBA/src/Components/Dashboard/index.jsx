@@ -84,7 +84,7 @@ const Dashboard = () => {
         <div className="photo-box">
           {user?.profile_image ? (
             <img
-              src={`http://localhost:5000/uploads/profile/${user.profile_image}`}
+              src={`http://localhost:5000/uploads/${user.profile_image}`}
               alt="Profile"
               style={{
                 width: "100%",

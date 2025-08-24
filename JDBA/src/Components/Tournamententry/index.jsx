@@ -62,31 +62,33 @@ const TournamentEntry = () => {
   };
 
   const handleSubmit = async () => {
-    const selected = tournaments.find((t) => t.name === selectedTournament);
-    if (!selected) {
-      alert("Please select a valid tournament.");
-      return;
-    }
+  const selected = tournaments.find((t) => t.id === parseInt(selectedTournament));
+  if (!selected) {
+    alert("Please select a valid tournament.");
+    return;
+  }
 
-    const payload = {
-      tournament_id: selected.id,
-      player_name: playerEntry.player_name,
-      dob: playerEntry.dob,
-      gender: playerEntry.gender,
-    };
-
-    try {
-      await authenticatedFetch("/api/register", {
-        method: "POST",
-        body: JSON.stringify(payload),
-      });
-
-      setShowConfirmation(true);
-      setTimeout(() => setShowConfirmation(false), 3000);
-    } catch (err) {
-      alert("Submission failed: " + err.message);
-    }
+  const payload = {
+    player_id: playerEntry.player_id,   // ✅ added
+    tournament_id: selected.id,
+    player_name: playerEntry.player_name,
+    dob: playerEntry.dob,
+    gender: playerEntry.gender,
   };
+
+  try {
+    await authenticatedFetch("/api/registrations/register", {
+      method: "POST",
+      body: JSON.stringify(payload),
+    });
+
+    setShowConfirmation(true);
+    setTimeout(() => setShowConfirmation(false), 3000);
+  } catch (err) {
+    alert("Submission failed: " + err.message);
+  }
+};
+
 
   return (
     <div className="container tournament-entry">
@@ -123,7 +125,7 @@ const TournamentEntry = () => {
           >
             <option value="">Select Tournament</option>
             {filteredTournaments.map((tournament) => (
-              <option key={tournament.id} value={tournament.name}>
+              <option key={tournament.id} value={tournament.id}>
                 {tournament.name}
               </option>
             ))}

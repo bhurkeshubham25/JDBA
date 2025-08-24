@@ -14,7 +14,7 @@ import { useState } from "react";
 
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
-    bai_id: "", // yes or no
+    bai_id: "", 
     mba_id: "",
     email: "",
     first_name: "",
@@ -25,7 +25,7 @@ const RegistrationForm = () => {
     mobile_number: "",
     address: "",
     aadhar_number: "",
-    password: "123456", // default for now, since not in form
+    password: "123456",
   });
 
   const [aadharImage, setAadharImage] = useState(null);
