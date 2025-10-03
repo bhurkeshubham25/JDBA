@@ -17,29 +17,32 @@ const SignIn = () => {
   const { login } = useContext(AuthContext);
 
   const handleLogin = async (e) => {
-    e.preventDefault();
-    setErrorMsg("");
+  e.preventDefault();
+  setErrorMsg("");
 
-    try {
-      const res = await fetch("http://localhost:5000/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
+  try {
+    const res = await fetch("http://localhost:5000/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
 
-      const data = await res.json();
+    const data = await res.json();
 
-      if (!res.ok) {
-        setErrorMsg(data.message || "Login failed");
-        return;
-      }
-
-      login(data.token, data.playerId); // Save in context and localStorage
-      navigate("/dashboard");
-    } catch (err) {
-      setErrorMsg("Server error. Try again.");
+    if (!res.ok) {
+      setErrorMsg(data.message || "Login failed");
+      return;
     }
-  };
+
+    // data: { token, user, playerId }
+    login(data.token, data.user);
+    navigate("/dashboard");
+  } catch (err) {
+    console.error('signin error', err);
+    setErrorMsg("Server error. Try again.");
+  }
+};
+
 
   return (
     <section className="signin-section">

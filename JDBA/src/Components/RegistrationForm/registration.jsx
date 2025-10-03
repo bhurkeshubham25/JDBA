@@ -184,8 +184,8 @@ const RegistrationForm = () => {
             <div className="input-date-wrapper" style={{ position: "relative" }}>
               <input
                 type="date"
-                name="dob"
-                value={formData.dob}
+                name="birth_date"
+                value={formData.birth_date}
                 onChange={handleChange}
               />
               <FaBirthdayCake className="date-icon" />
@@ -197,9 +197,9 @@ const RegistrationForm = () => {
             <label>Mobile Number</label>
             <input
               type="text"
-              name="mobile_number"
+              name="contact_number"
               placeholder="Enter Your Mobile No"
-              value={formData.mobile_number}
+              value={formData.contact_number}
               onChange={handleChange}
             />
             <FaPhone className="icon" />
