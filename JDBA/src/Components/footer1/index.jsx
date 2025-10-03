@@ -56,7 +56,7 @@ const Footer1 = () => {
           <p>Phone no : +91 89767915555</p>
           <p>
             Address : Badminton Lane<br />
-         <span style={{paddingLeft:"20px"}}>Jalgaon Maharastra</span>   
+         <span style={{paddingLeft:"20px"}}>Jalgaon Maharashtra</span>   
           </p>
         </div>
       </div>
